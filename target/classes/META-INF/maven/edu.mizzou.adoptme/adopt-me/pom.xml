@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.mizzou.adoptme</groupId>
+  <artifactId>adopt-me</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Adopt me </name>
+  <description>This maven project will allow the user to adopt, view and sort pets through a GUI. </description>
+</project>
