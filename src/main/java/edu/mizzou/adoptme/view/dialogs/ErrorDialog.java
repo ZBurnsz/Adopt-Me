@@ -9,6 +9,10 @@ public class ErrorDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	/* 
+	 * Not much we can change here 
+	 */
 	public ErrorDialog(JFrame parent, String errorMessage) {
         super(parent, "Error", true);
         setSize(300, 150);

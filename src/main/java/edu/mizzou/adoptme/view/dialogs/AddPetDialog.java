@@ -14,6 +14,9 @@ public class AddPetDialog extends JDialog {
     private JComboBox<String> speciesBox;
     private boolean confirmed = false;
 
+    /* 
+     * Styling for addPet we can change this around to our liking. 
+     */
     public AddPetDialog(JFrame parent) {
         super(parent, "Add New Pet", true);
         setLayout(new BorderLayout());

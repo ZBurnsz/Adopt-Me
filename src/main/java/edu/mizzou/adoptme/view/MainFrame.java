@@ -8,6 +8,12 @@ import edu.mizzou.adoptme.view.panels.SortingPanel;
 import javax.swing.*;
 import java.awt.*;
 
+
+/*
+ * 
+ * We can change this to mess with the look of the GUI 
+ * this is a base layout for now. 
+ */
 public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
@@ -19,6 +25,7 @@ public class MainFrame extends JFrame {
     public MainFrame(PetController controller) {
         this.setController(controller);
         setTitle("Adopt Me - Pet Adoption Center");
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
         setLayout(new BorderLayout(10, 10));
@@ -35,6 +42,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    //getters and setters for controller. 
     public void refreshPetList() {
         petListPanel.refreshTable();
     }

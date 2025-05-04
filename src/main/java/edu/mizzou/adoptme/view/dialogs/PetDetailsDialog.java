@@ -15,6 +15,9 @@ public class PetDetailsDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/* 
+	 * 
+	 */
 	public PetDetailsDialog(JFrame parent, Pet pet) {
         super(parent, "Pet Details", true);
         setLayout(new BorderLayout());
@@ -22,6 +25,7 @@ public class PetDetailsDialog extends JDialog {
         setLocationRelativeTo(parent);
 
         JPanel infoPanel = new JPanel();
+        
         infoPanel.setLayout(new GridLayout(5, 1, 10, 10));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 

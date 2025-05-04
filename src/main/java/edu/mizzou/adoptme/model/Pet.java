@@ -8,6 +8,7 @@ public abstract class Pet implements Comparable<Pet>{
 	private AdoptionStatus status; 
 	
 	public Pet(String name, int age, String species) { 
+		//json style. 
 		this.name = name; 
 		this.age = age; 
 		this.species = species; 
