@@ -18,26 +18,45 @@ public abstract class Pet implements Comparable<Pet>{
 	
 	public abstract String getDetails(); 
 	
+    /**
+     *@return name of pet
+     */
 	public String getName() {
 		return name; 
 	}
 	
+    /**
+     *@return age of pet 
+     */
 	public int getAge() { 
 		return age; 
 	}
 	
+    /**
+     *@return species of pet
+     */
 	public String getSpecies() { 
 		return species; 
 	}
 	
+    /**
+     *@return adopted or not status
+     */
 	public AdoptionStatus getStatus() { 
 		return status; 
 	}
 	
+    /**
+     *@return sets adoption status to be addopted
+     */
 	public void adopt() { 
 		this.status = AdoptionStatus.ADOPTED; 
 	}
 	
+    /**
+     *@param other
+     *@return sets adoption status to be addopted
+     */
 	@Override
 	public int compareTo(Pet other) { 
 		return this.name.compareTo(other.name); 
