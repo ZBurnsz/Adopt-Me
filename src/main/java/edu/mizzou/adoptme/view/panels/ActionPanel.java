@@ -35,5 +35,16 @@ public class ActionPanel extends JPanel {
             }
         });
         add(adoptButton);
+
+        //remove pet button
+        JButton removeButton = new JButton("Remove Pet");
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("removing pet");
+                controller.removeSelectedPet();
+            }
+        });
+        add(removeButton);
     }
 }
