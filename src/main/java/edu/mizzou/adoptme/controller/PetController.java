@@ -53,7 +53,7 @@ public class PetController {
         if (selectedRow == -1) {
         	return null;
         }
-        
+        System.out.println("pet has been selected");
         return shelter.getPets().get(selectedRow);
     }
     
@@ -106,7 +106,8 @@ public class PetController {
         Pet selected = getSelectedPet();
         
         if (selected != null) {
-            shelter.getPets().remove(selected);
+            shelter.removePet(selected);
+            JOptionPane.showMessageDialog(null, selected.getName() + " has been removed!");
             refreshTable();
         }
     }
