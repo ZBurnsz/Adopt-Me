@@ -14,6 +14,7 @@ public abstract class Pet implements Comparable<Pet>{
 		this.status = AdoptionStatus.AVAILABLE; 
 	}
 	
+	
 	public abstract String getDetails(); 
 	
 	public String getName() {
@@ -31,6 +32,7 @@ public abstract class Pet implements Comparable<Pet>{
 	public AdoptionStatus getStatus() { 
 		return status; 
 	}
+	
 	public void adopt() { 
 		this.status = AdoptionStatus.ADOPTED; 
 	}

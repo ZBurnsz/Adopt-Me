@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shelter<T extends Pet> {
+	
     private List<T> pets;
 
     public Shelter() {

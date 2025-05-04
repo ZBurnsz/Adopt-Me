@@ -10,7 +10,6 @@ public class ExoticAnimalAdapter extends Pet {
 
     @Override
     public String getDetails() {
-        return "I'm an exotic " + exotic.getType() + " named " + exotic.getExoticName()
-               + ", age " + exotic.getExoticAge();
+        return "I'm an exotic " + exotic.getType() + " named " + exotic.getExoticName() + ", age " + exotic.getExoticAge();
     }
 }
