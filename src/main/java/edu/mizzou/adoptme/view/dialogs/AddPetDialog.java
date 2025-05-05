@@ -11,7 +11,8 @@ public class AddPetDialog extends JDialog {
 	
 	private JTextField nameField;
     private JTextField ageField;
-    private JComboBox<String> speciesBox;
+    private JTextField typeField;
+    private JTextField speciesBox;
     private boolean confirmed = false;
 
     /* 
@@ -26,7 +27,8 @@ public class AddPetDialog extends JDialog {
 
         nameField = new JTextField();
         ageField = new JTextField();
-        speciesBox = new JComboBox<>(new String[]{"Dog", "Cat", "Rabbit"});
+        speciesBox = new JTextField();
+        typeField = new JTextField();
 
         inputPanel.add(new JLabel("Name:"));
         inputPanel.add(nameField);
@@ -34,6 +36,7 @@ public class AddPetDialog extends JDialog {
         inputPanel.add(ageField);
         inputPanel.add(new JLabel("Species:"));
         inputPanel.add(speciesBox);
+       
 
         JPanel buttonPanel = new JPanel();
         JButton okBtn = new JButton("OK");
@@ -71,6 +74,10 @@ public class AddPetDialog extends JDialog {
     }
 
     public String getSpeciesInput() {
-        return (String) speciesBox.getSelectedItem();
+        return (String) speciesBox.getText().trim();
+    }
+    
+    public String getTypeInput() {
+    	return typeField.getText().trim();
     }
 }

@@ -1,6 +1,6 @@
 package edu.mizzou.adoptme.view.dialogs;
 
-import edu.mizzou.adoptme.model.Pet;
+import edu.mizzou.adoptme.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,8 @@ public class PetDetailsDialog extends JDialog {
 
         infoPanel.add(new JLabel("Name: " + pet.getName()));
         infoPanel.add(new JLabel("Age: " + pet.getAge()));
-        infoPanel.add(new JLabel("Species: " + pet.getClass().getSimpleName()));
+        infoPanel.add(new JLabel("Type: " + pet.getType()));
+        infoPanel.add(new JLabel("Species: " + pet.getSpecies()));
         infoPanel.add(new JLabel("Adopted: " + (pet.getStatus())));
 
         add(infoPanel, BorderLayout.CENTER);

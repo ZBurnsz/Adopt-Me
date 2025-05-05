@@ -6,6 +6,6 @@ import java.util.Comparator;
 public class PetSpeciesComparator implements Comparator<Pet> {
     @Override
     public int compare(Pet p1, Pet p2) {
-        return p1.getClass().getSimpleName().compareTo(p2.getClass().getSimpleName());
+        return p1.getSpecies().compareTo(p2.getSpecies());
     }
 }

@@ -66,9 +66,10 @@ public class JsonUtils {
             int age = obj.get("age").getAsInt();
             String species = obj.get("species").getAsString();
             boolean adopted = obj.has("adopted") && obj.get("adopted").getAsBoolean();
+            String type = obj.get("type").getAsString();
 
             AdoptionStatus status = adopted ? AdoptionStatus.ADOPTED : AdoptionStatus.AVAILABLE;
-            return new GenericPetImplementation(name, age, species, status);
+            return new GenericPetImplementation(name, age, species, status, type);
         }
     }
 }
