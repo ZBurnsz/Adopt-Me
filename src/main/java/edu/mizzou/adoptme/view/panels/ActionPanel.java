@@ -41,10 +41,19 @@ public class ActionPanel extends JPanel {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("removing pet");
                 controller.removeSelectedPet();
             }
         });
         add(removeButton);
+
+        //view details button
+        JButton viewDetailsButton = new JButton("View Details");
+        viewDetailsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.getDetails((JFrame) SwingUtilities.getWindowAncestor(viewDetailsButton));
+            }
+        });
+        add(viewDetailsButton);
     }
 }
