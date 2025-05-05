@@ -4,7 +4,7 @@ public class ExoticAnimalAdapter extends Pet {
     private ExoticAnimalDTO exotic;
 
     public ExoticAnimalAdapter(ExoticAnimalDTO exotic) {
-        super(exotic.getExoticName(), exotic.getExoticAge(), exotic.getType());
+        super(exotic.getExoticName(), exotic.getExoticAge(), exotic.getType(), exotic.getExoticName());
         this.exotic = exotic;
     }
 

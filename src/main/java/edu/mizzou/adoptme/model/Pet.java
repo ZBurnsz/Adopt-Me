@@ -4,18 +4,33 @@ package edu.mizzou.adoptme.model;
 public abstract class Pet implements Comparable<Pet>{
 	private String name; 
 	private int age; 
+    private String type;
 	private String species; 
 	private AdoptionStatus status; 
 	
-	public Pet(String name, int age, String species) { 
+	public Pet(String name, int age, String species, String type) { 
 		//json style. 
 		this.name = name; 
 		this.age = age; 
+        this.type = type;
 		this.species = species; 
 		this.status = AdoptionStatus.AVAILABLE; 
 	}
 	
 	
+    /**
+     *@return type of pet
+     */
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 	public abstract String getDetails(); 
 	
     /**

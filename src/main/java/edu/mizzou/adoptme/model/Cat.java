@@ -3,8 +3,8 @@ package edu.mizzou.adoptme.model;
 public class Cat extends Pet {
 
 
-	public Cat(String name, int age, String species) {
-		super(name, age, "Cat");
+	public Cat(String name, int age, String species, String type) {
+		super(name, age, "Cat", type);
 	}
 
 	@Override

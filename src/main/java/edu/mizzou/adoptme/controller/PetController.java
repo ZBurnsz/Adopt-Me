@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Collections;
 
 public class PetController {
     private final Shelter<Pet> shelter = new Shelter<>();
@@ -63,6 +64,7 @@ public class PetController {
             String name = dialog.getNameInput();
             int age = dialog.getAgeInput();
             String species = dialog.getSpeciesInput();
+            String type = dialog.getTypeInput();
 
             if (name.isEmpty() || age < 0) {
                 throw new IllegalArgumentException("Invalid pet data");
@@ -70,10 +72,10 @@ public class PetController {
 
             Pet newPet;
             switch (species) {
-                case "Dog" -> newPet = new Dog(name, age, species);
-                case "Cat" -> newPet = new Cat(name, age, species);
-                case "Rabbit" -> newPet = new Rabbit(name, age, species);
-                default -> newPet = new GenericPetImplementation(name, age, species, AdoptionStatus.AVAILABLE);
+                case "Dog" -> newPet = new Dog(name, age, species, type);
+                case "Cat" -> newPet = new Cat(name, age, species, type);
+                case "Rabbit" -> newPet = new Rabbit(name, age, species, type);
+                default -> newPet = new GenericPetImplementation(name, age, species, AdoptionStatus.AVAILABLE, type);
             }
 
             shelter.addPet(newPet);
@@ -126,10 +128,8 @@ public class PetController {
     public void sortPets(String criteria) {
         switch (criteria) {
             case "Sort by Age" -> shelter.getPets().sort(new PetAgeComparator());
-            
             case "Sort by Species" -> shelter.getPets().sort(new PetSpeciesComparator());
-            
-            default -> shelter.getPets().sort(null);
+            case "Sort by Name" -> Collections.sort(shelter.getPets()); // uses compareTo()
         }
         refreshTable();
     }
