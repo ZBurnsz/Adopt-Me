@@ -23,10 +23,11 @@ public class PetListPanel extends JPanel {
 
         petTable = new JTable();
         controller.setPetTable(petTable);
+        
         refreshTable();
 
         add(new JScrollPane(petTable), BorderLayout.CENTER);
-    }
+    }	
 
     public void refreshTable() {
         DefaultTableModel model = controller.getPetTableModel();
