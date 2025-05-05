@@ -22,7 +22,7 @@ public class AddPetDialog extends JDialog {
         super(parent, "Add New Pet", true);
         setLayout(new BorderLayout());
 
-        JPanel inputPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel inputPanel = new JPanel(new GridLayout(4, 2, 10, 10));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         nameField = new JTextField();
@@ -36,6 +36,8 @@ public class AddPetDialog extends JDialog {
         inputPanel.add(ageField);
         inputPanel.add(new JLabel("Species:"));
         inputPanel.add(speciesBox);
+        inputPanel.add(new JLabel("Type:"));
+        inputPanel.add(typeField);
        
 
         JPanel buttonPanel = new JPanel();
