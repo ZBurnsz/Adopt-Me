@@ -5,6 +5,7 @@ import edu.mizzou.adoptme.utils.JsonUtils;
 import edu.mizzou.adoptme.comparator.PetAgeComparator;
 import edu.mizzou.adoptme.comparator.PetSpeciesComparator;
 import edu.mizzou.adoptme.view.dialogs.AddPetDialog;
+import edu.mizzou.adoptme.view.dialogs.PetDetailsDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -53,7 +54,6 @@ public class PetController {
         if (selectedRow == -1) {
         	return null;
         }
-        System.out.println("pet has been selected");
         return shelter.getPets().get(selectedRow);
     }
     
@@ -109,6 +109,17 @@ public class PetController {
             shelter.removePet(selected);
             JOptionPane.showMessageDialog(null, selected.getName() + " has been removed!");
             refreshTable();
+        }
+    }
+
+    //view details of the pet author: turner
+    public void getDetails(JFrame parentFrame) {
+        Pet selectedPet = getSelectedPet();
+        if (selectedPet != null) {
+            PetDetailsDialog dialog = new PetDetailsDialog(parentFrame, selectedPet);
+            dialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(parentFrame, "Please select a pet first.", "No Selection", JOptionPane.WARNING_MESSAGE);
         }
     }
 
