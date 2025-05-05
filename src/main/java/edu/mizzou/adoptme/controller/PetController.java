@@ -18,6 +18,7 @@ public class PetController {
     private final Shelter<Pet> shelter = new Shelter<>();
     private JTable petTable;
     
+    
     //loads pets from pets.json 
     public PetController() {
     	//pets.json 
@@ -35,8 +36,15 @@ public class PetController {
 
     public DefaultTableModel getPetTableModel() {
         String[] columns = {"Name", "Age", "Species", "Type", "Adopted"};
-        
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
+
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+			private static final long serialVersionUID = 1L;
+			//stops cell editing from table view. 
+			@Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
 
         for (Pet pet : shelter.getUnmodifiablePets()) {
             model.addRow(new Object[]{
@@ -47,8 +55,11 @@ public class PetController {
                     pet.getStatus() == AdoptionStatus.ADOPTED ? "Yes" : "No"
             });
         }
+
         return model;
     }
+    
+    
 
     public Pet getSelectedPet() {
         int selectedRow = petTable.getSelectedRow();
@@ -146,7 +157,7 @@ public class PetController {
 
     public void savePetsToFile() {
         String timestamp = new SimpleDateFormat("yyyyMMdd HHmmss").format(new Date());
-        JsonUtils.savePetsToJson(shelter.getPets(), "src/main/resources/" + timestamp + "_pets.json");
+        JsonUtils.savePetsToJson(shelter.getUnmodifiablePets(), "src/main/resources/" + timestamp + "_pets.json");
         JOptionPane.showMessageDialog(null, "Pet list saved.");
     }
 }
