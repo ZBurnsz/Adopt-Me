@@ -1,3 +1,4 @@
+
 package edu.mizzou.adoptme.controller;
 
 import edu.mizzou.adoptme.model.*;
@@ -14,33 +15,45 @@ import java.util.Date;
 import java.util.List;
 import java.util.Collections;
 
+/**
+ * Controller class for handling operations related to the pets. 
+ * Acts as the intermediary between the model and view in the MVC architecture.
+ */
 public class PetController {
     private final Shelter<Pet> shelter = new Shelter<>();
     private JTable petTable;
-    
-    
-    //loads pets from pets.json 
+
+    /**
+     * loads pets from pets.json 
+     */
     public PetController() {
-    	//pets.json 
+        //pets.json 
         List<Pet> loadedPets = JsonUtils.loadPetsFromJson("src/main/resources/pets.json");
         if (loadedPets != null) loadedPets.forEach(shelter::addPet);
         //exotic_anmials.json 
         List<Pet> exotics = JsonUtils.loadExoticsFromJson("src/main/resources/exotic_animals.json");
         if (exotics != null) exotics.forEach(shelter::addPet);
     }
-    
-    //creates table
+
+    /**
+     * creates table
+     * @param table JTable to be managed by the controller
+     */
     public void setPetTable(JTable table) {
         this.petTable = table;
     }
 
+    /**
+     * Generates and returns the table model for the pet table
+     * @return a DefaultTableModel with pet data
+     */
     public DefaultTableModel getPetTableModel() {
         String[] columns = {"Name", "Age", "Species", "Type", "Adopted"};
 
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
-			private static final long serialVersionUID = 1L;
-			//stops cell editing from table view. 
-			@Override
+            private static final long serialVersionUID = 1L;
+            //stops cell editing from table view. 
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false; 
             }
@@ -58,19 +71,24 @@ public class PetController {
 
         return model;
     }
-    
-    
 
+    /**
+     * gets the selected pet in the table
+     * @return the Pet object corresponding to the selected table row
+     */
     public Pet getSelectedPet() {
         int selectedRow = petTable.getSelectedRow();
-        
+
         if (selectedRow == -1) {
-        	return null;
+            return null;
         }
         return shelter.getUnmodifiablePets().get(selectedRow);
     }
-    
-    //allows you to add a pet into the table. 
+
+    /**
+     * allows you to add a pet into the table. 
+     * @param dialog input dialog for adding a new pet
+     */
     public void addPetFromDialog(AddPetDialog dialog) {
         try {
             String name = dialog.getNameInput();
@@ -92,45 +110,54 @@ public class PetController {
 
             shelter.addPet(newPet);
             refreshTable();
-            
+
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, "Invalid input: " + error.getMessage());
         }
     }
 
+    /**
+     * adopts a selected pet from the list
+     */
     public void adoptSelectedPet() {
         Pet selected = getSelectedPet();
-        
+
         if (selected == null) {
             JOptionPane.showMessageDialog(null, "Please select a pet to adopt.");
             return;
         }
-        
+
         if (selected.getStatus() == AdoptionStatus.ADOPTED) {
             JOptionPane.showMessageDialog(null, "This pet is already adopted :)");
         } else {
             selected.adopt();
-            
+
             JOptionPane.showMessageDialog(null, selected.getName() + " has been adopted!");
             refreshTable();
         }
     }
 
+    /**
+     * removes the selected pet from the table
+     */
     public void removeSelectedPet() {
         Pet selected = getSelectedPet();
-        
+
         if (selected != null) {
             shelter.removePet(selected);
-            
+
             JOptionPane.showMessageDialog(null, selected.getName() + " has been removed!");
             refreshTable();
         }
     }
 
-    //view details of the pet author: turner 
+    /**
+     * view details of the pet author: turner 
+     * @param parentFrame parent JFrame
+     */
     public void getDetails(JFrame parentFrame) {
         Pet selectedPet = getSelectedPet();
-        
+
         if (selectedPet != null) {
             PetDetailsDialog dialog = new PetDetailsDialog(parentFrame, selectedPet);
             dialog.setVisible(true);
@@ -138,8 +165,13 @@ public class PetController {
             JOptionPane.showMessageDialog(parentFrame, "Please select a pet first.", "No Selection", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    /**
+     * sorts the pet list based on criteria and updates the table
+     * @param criteria String for sort choice
+     */
     public void sortPets(String criteria) {
-    	//System.out.println("Sorting pets by: " + criteria); 
+        //System.out.println("Sorting pets by: " + criteria); 
 
         switch (criteria) {
             case "Sort by Age" -> shelter.getPets().sort(new PetAgeComparator());
@@ -149,12 +181,18 @@ public class PetController {
         refreshTable();
     }
 
+    /**
+     * refreshes the JTable with current pet list
+     */
     private void refreshTable() {
         if (petTable != null) {
             petTable.setModel(getPetTableModel());
         }
     }
 
+    /**
+     * saves the current pet list to a JSON file with timestamp layout from PDF 
+     */
     public void savePetsToFile() {
         String timestamp = new SimpleDateFormat("yyyyMMdd HHmmss").format(new Date());
         JsonUtils.savePetsToJson(shelter.getUnmodifiablePets(), "src/main/resources/" + timestamp + "_pets.json");
