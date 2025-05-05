@@ -34,15 +34,16 @@ public class PetController {
     }
 
     public DefaultTableModel getPetTableModel() {
-        String[] columns = {"Name", "Age", "Species", "Adopted"};
+        String[] columns = {"Name", "Age", "Species", "Type", "Adopted"};
         
         DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        for (Pet pet : shelter.getPets()) {
+        for (Pet pet : shelter.getUnmodifiablePets()) {
             model.addRow(new Object[]{
                     pet.getName(),
                     pet.getAge(),
                     pet.getSpecies(),
+                    pet.getType(),
                     pet.getStatus() == AdoptionStatus.ADOPTED ? "Yes" : "No"
             });
         }
@@ -55,7 +56,7 @@ public class PetController {
         if (selectedRow == -1) {
         	return null;
         }
-        return shelter.getPets().get(selectedRow);
+        return shelter.getUnmodifiablePets().get(selectedRow);
     }
     
     //allows you to add a pet into the table. 
@@ -109,14 +110,16 @@ public class PetController {
         
         if (selected != null) {
             shelter.removePet(selected);
+            
             JOptionPane.showMessageDialog(null, selected.getName() + " has been removed!");
             refreshTable();
         }
     }
 
-    //view details of the pet author: turner
+    //view details of the pet author: turner 
     public void getDetails(JFrame parentFrame) {
         Pet selectedPet = getSelectedPet();
+        
         if (selectedPet != null) {
             PetDetailsDialog dialog = new PetDetailsDialog(parentFrame, selectedPet);
             dialog.setVisible(true);
@@ -124,8 +127,9 @@ public class PetController {
             JOptionPane.showMessageDialog(parentFrame, "Please select a pet first.", "No Selection", JOptionPane.WARNING_MESSAGE);
         }
     }
-
     public void sortPets(String criteria) {
+    	//System.out.println("Sorting pets by: " + criteria); 
+
         switch (criteria) {
             case "Sort by Age" -> shelter.getPets().sort(new PetAgeComparator());
             case "Sort by Species" -> shelter.getPets().sort(new PetSpeciesComparator());
