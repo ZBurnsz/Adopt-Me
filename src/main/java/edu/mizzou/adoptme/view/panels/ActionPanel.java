@@ -55,5 +55,15 @@ public class ActionPanel extends JPanel {
             }
         });
         add(viewDetailsButton);
+
+        //save button
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.savePetsToFile();
+            }
+        });
+        add(saveButton);
     }
 }
